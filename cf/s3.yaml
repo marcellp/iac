@@ -113,3 +113,38 @@ Resources:
             AllowedOrigins:
               - '*'
             Id: uiHeadersRule
+  PublicDatasetsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: !Sub "public-datasets"
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: True
+          BlockPublicPolicy: True
+          IgnorePublicAcls: True
+          RestrictPublicBuckets: True
+        VersioningConfiguration:
+          Status: "Enabled"
+        LifecycleConfiguration:
+          Rules:
+            # Non-current versions of source files are stored in normal S3 for
+            # 5 days and are then deleted.
+            - Id: PreserveThenDeleteNonCurrentVersion
+              Status: "Enabled"
+              NoncurrentVersionExpirationInDays: 5
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - '*'
+              ExposedHeaders:
+                - ETag
+                - "x-amz-server-side-encryption"
+                - "x-amz-request-id"
+                - "x-amz-id-2"
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+              AllowedOrigins:
+                - '*'
+              Id: uiHeadersRule
