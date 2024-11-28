@@ -19,7 +19,7 @@ metadata:
       "443", "StatusCode": "HTTP_301"}}
     alb.ingress.kubernetes.io/certificate-arn: >-
       {{ .Values.myAccount.acmCertificate }}
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
 {{- end }}
 {{- if eq .Values.myAccount.publicFacing "true" }}
     alb.ingress.kubernetes.io/scheme: internet-facing

@@ -12,7 +12,7 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: >-
       {{ .Values.acmCertificate }}
     alb.ingress.kubernetes.io/group.name: "{{ .Values.clusterEnv }}"
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
     alb.ingress.kubernetes.io/target-type: ip
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/group.order: '1000'
